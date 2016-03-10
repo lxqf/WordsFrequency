@@ -33,12 +33,4 @@ uint16_t Word::getNum()
 {
     return num;
 }
-bool Word::operator > (const Word& pinfo) const
-{
-    return num > pinfo.num;
-}
 
-bool Word::operator < (const Word& pinfo) const
-{
-    return num < pinfo.num;
-}

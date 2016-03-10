@@ -20,24 +20,17 @@
 //使用命名空间std
 using namespace std;
 
-bool sortByNum(Word* w1, Word* w2)
+std::vector<Word*> sortVector(std::vector<Word*> vec)
 {
-    if (w1 && w2) {
-        return w1->getNum() > w2->getNum();
-    }
-    return true;
-}
-
-void sortVector(std::vector<Word*> vec)
-{
-    std::sort(vec.begin(), vec.end(), sortByNum);
+    //使用std::sort对vector进行排序，排序规则使用拉姆达表达式
+    std::sort(vec.begin(), vec.end(), [](Word* w1, Word* w2){ return w1->getNum() > w2->getNum();});
+    return vec;
 }
 
 void printAllObject(std::vector<Word*> vec)
 {
-//排序算法有问题 不能使用
-//    sortVector(vec);
-    for (auto p : vec) {
+    std::vector<Word*> newVec = sortVector(vec);        //得到排序后的新vector
+    for (auto p : newVec) {
         if (p) {
             std::cout << p->getWord() << " : " << p->getNum() << endl;
         }
@@ -68,7 +61,7 @@ int main(int argc, const char * argv[]) {
     std::vector<Word*> vec;         //容器用来存储所有word对象, 类似于数组, 但是可以存储对象类型
     
     
-    const std::regex pattern("\\w+");               //正则表达式匹配模式     \w是匹配字母 多加个\是转义 +号是匹配一个及以上的字母组合即单词
+    const std::regex pattern("[a-zA-z]+");               //正则表达式匹配模式     \w是匹配字母 多加个\是转义 +号是匹配一个及以上的字母组合即单词
     std::string target = buffer;
     const std::sregex_token_iterator end;
     for (std::sregex_token_iterator i (target.begin(), target.end(), pattern); i != end; ++i) {             //遍历匹配字符串里所有符合匹配模式的单词

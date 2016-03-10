@@ -18,8 +18,6 @@ public:
     std::string getWord();
     void setNum();
     uint16_t getNum();
-    bool operator > (const Word& pinfo) const;
-    bool operator < (const Word& pinfo) const;
 private:
     std::string word;
     uint16_t num;
